@@ -1,48 +1,49 @@
 <?php
-// Database connection details
-include 'config.php';
+// Get form data
+$name = $_POST['name'];
+$title = $_POST['title'];
+$description = $_POST['description'];
+$price = $_POST['price'];
+$pax = $_POST['pax'];
+$time = $_POST['date'];
+$location = $_POST['location'];
 
-// Create database connection
+// File upload
+$targetDirectory = "../assets/images/"; // Specify the target directory for file uploads
+$fileName = $_FILES['image']['name'];
+$targetFilePath = $targetDirectory . $fileName;
+move_uploaded_file($_FILES['image']['tmp_name'], $targetFilePath);
+
+// Database connection
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "mysite";
+
+// Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
 
-// Check for connection errors
+// Check connection
 if ($conn->connect_error) {
-    die('Connection failed: ' . $conn->connect_error);
+    die("Connection failed: " . $conn->connect_error);
 }
 
-// Check if the request method is POST
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Retrieve the data from the request
-    $name = $_POST['name'];
-    $title = $_POST['title'];
-    $description = $_POST['description'];
-    $price = $_POST['price'];
-    $pax = $_POST['pax'];
-    $image = $_POST['image'];
-    $time = $_POST['time'];
-    $location = $_POST['location'];
+// Prepare and bind the SQL statement
+$stmt = $conn->prepare("INSERT INTO packages (name, title, description, price, pax, time, location, image) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+$stmt->bind_param("ssssssss", $name, $title, $description, $price, $pax, $time, $location, $fileName);
 
-    // Prepare a SQL statement to insert data
-    $stmt = $conn->prepare('INSERT INTO packages (name, title, description, price, pax, image, time, location) VALUES (?, ?, ?, ?, ?, ?, ?, ?)');
-    $stmt->bind_param('ssssssss', $name, $title, $description, $price, $pax, $image, $time, $location);
-    $stmt->execute();
-
-    // Check if the data was successfully inserted
-    if ($stmt->affected_rows > 0) {
-        $response = array('message' => 'Data inserted successfully');
-        echo json_encode($response);
-    } else {
-        $response = array('message' => 'Failed to insert data');
-        echo json_encode($response);
-    }
-
-    // Close the statement
-    $stmt->close();
+// Execute the statement
+if ($stmt->execute()) {
+    $response = array('status' => 'success', 'message' => 'Data inserted successfully');
 } else {
-    $response = array('message' => 'Invalid request method');
-    echo json_encode($response);
+    $response = array('status' => 'error', 'message' => 'Failed to insert data');
 }
 
-// Close the connection
+// Close statement and database connection
+$stmt->close();
 $conn->close();
+
+// Return JSON response
+header('Content-Type: application/json');
+echo json_encode($response);
 ?>
