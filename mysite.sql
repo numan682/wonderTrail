@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Jun 10, 2023 at 06:42 AM
--- Server version: 10.4.21-MariaDB
--- PHP Version: 8.1.6
+-- Host: 127.0.0.1
+-- Generation Time: Jun 15, 2023 at 02:24 PM
+-- Server version: 10.4.28-MariaDB
+-- PHP Version: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,6 +24,31 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `bookings`
+--
+
+CREATE TABLE `bookings` (
+  `id` int(100) NOT NULL,
+  `userId` varchar(100) NOT NULL,
+  `packageId` int(100) NOT NULL,
+  `payment` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Dumping data for table `bookings`
+--
+
+INSERT INTO `bookings` (`id`, `userId`, `packageId`, `payment`) VALUES
+(1, '0', 0, '70000'),
+(2, '0', 10, '39900'),
+(3, '0', 10, '39900'),
+(4, 'jhnuman', 10, '39900'),
+(5, 'jhnuman', 10, '39900'),
+(6, 'jhnuman', 10, '39900');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `packages`
 --
 
@@ -37,14 +62,16 @@ CREATE TABLE `packages` (
   `location` varchar(100) NOT NULL,
   `image` varchar(255) DEFAULT NULL,
   `time` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `packages`
 --
 
 INSERT INTO `packages` (`id`, `name`, `title`, `description`, `price`, `pax`, `location`, `image`, `time`) VALUES
-(1, 'Dhaka 5D TOur Package', 'Dhaka 5D TOur Package', 'Dhaka 5D TOur Package With Description', '200', '4', 'Dhaka,Bangladesh', NULL, NULL);
+(9, 'EXPERIENCE THE GREAT HOLIDAY ON BEACH', 'EXPERIENCE THE GREAT HOLIDAY ON BEACH', 'Laoreet, voluptatum nihil dolor esse quaerat mattis explicabo maiores, est aliquet porttitor! Eaque,', '800', '10', 'Cox\'s Bazar, Chittagong', 'packege-1.jpg', '6D/5N'),
+(10, 'Saint Martin Tour Package', 'Saint Martin Tour Package', 'Saint Martin Tour Package From Dhaka. The Package includes all costs including transportation to mea', '400', '20', 'Saint Martin', 'packege-2.jpg', '3D/2N'),
+(11, 'COX\'s Bazar Tour Package', 'COX\'s Bazar Tour Package', 'COX\'s Bazar Tour Package For 6D/5N ', '400', '5', 'Cox\'s Bazar, Chittagong', 'packege-3.jpg', '6D/5N');
 
 -- --------------------------------------------------------
 
@@ -57,7 +84,7 @@ CREATE TABLE `userinfo` (
   `name` varchar(100) NOT NULL,
   `username` varchar(100) NOT NULL,
   `password` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `userinfo`
@@ -86,7 +113,7 @@ CREATE TABLE `users` (
   `username` varchar(150) NOT NULL,
   `email` varchar(100) NOT NULL,
   `password` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `users`
@@ -103,6 +130,12 @@ INSERT INTO `users` (`userid`, `username`, `email`, `password`) VALUES
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `bookings`
+--
+ALTER TABLE `bookings`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `packages`
@@ -127,10 +160,16 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT for table `bookings`
+--
+ALTER TABLE `bookings`
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
 -- AUTO_INCREMENT for table `packages`
 --
 ALTER TABLE `packages`
-  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `userinfo`

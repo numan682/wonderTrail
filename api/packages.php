@@ -9,9 +9,9 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 if ($conn->connect_error) {
     die('Connection failed: ' . $conn->connect_error);
 }
-
+$limit =$_GET['l'];
 // Prepare a SQL statement to retrieve data safely
-$stmt = $conn->prepare('SELECT * FROM packages');
+$stmt = $conn->prepare('SELECT * FROM packages LIMIT '.$limit);
 $stmt->execute();
 $result = $stmt->get_result();
 

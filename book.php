@@ -3,6 +3,7 @@ session_start();
 $username=$_SESSION['username'];
 $package= $_POST['package'];
 $price = $_POST['price'];
+$id = $_POST['id'];
 ?>
 
 
@@ -16,6 +17,7 @@ $price = $_POST['price'];
     <div class="container col-md-8">
         <h1>Shipping Address</h1>
         <form method="POST" action="./payment/index.php">
+            <input style="display:none" type="text" name="id" value="<?php echo $id ?>">
         <div class="form-group">
                 <label for="username">UserName</label>
                 <input type="text" class="form-control" id="username" name="username" readonly value="<?php echo $username ?>" required>

@@ -46,7 +46,7 @@ if(currPageView == '/tourly/index.php')
 {
   $(document).ready(function() {
             $.ajax({
-                url: 'api/packages.php',
+                url: 'api/packages.php?l=3',
                 type: 'GET',
                 dataType: 'json',
                 success: function(response) {
@@ -85,7 +85,7 @@ if(currPageView == '/tourly/index.php')
                       <div class="meta-box">
                         <ion-icon name="people"></ion-icon>
 
-                        <p class="text">pax: 10</p>
+                        <p class="text">pax: ${item.pax}</p>
                       </div>
                     </li>
 
@@ -124,6 +124,7 @@ if(currPageView == '/tourly/index.php')
 <form method="POST" action="book.php">
 <input class="hide" name="package" value="${item.name}" >
 <input  class="hide" name="price" value="${item.price}" >
+<input  class="hide" name="id" value="${item.id}" >
   <button type="submit" class="btn btn-secondary">Book Now</button>
 </form>
                 
