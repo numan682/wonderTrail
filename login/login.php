@@ -5,33 +5,38 @@ if(  isset($_SESSION['username']) )
   header("location:home.php");
   die();
 }
-//connect to database
-$db=mysqli_connect("localhost","root","","mysite");
-if($db)
-{
-  if(isset($_POST['login_btn']))
-  {
-      $username=mysqli_real_escape_string($db,$_POST['username']);
-      $password=mysqli_real_escape_string($db,$_POST['password']);
-      $password=md5($password); //Remember we hashed password before storing last time
-      $sql="SELECT * FROM users WHERE  username='$username' AND password='$password'";
-      $result=mysqli_query($db,$sql);
-      
-      if($result)
-      {
-     
-        if( mysqli_num_rows($result)>=1)
-        {
-            $_SESSION['message']="You are now Loggged In";
-            $_SESSION['username']=$username;
-            header("location:../index.php");
+// Connect to the database
+$db = mysqli_connect("localhost", "root", "", "mysite");
+
+if ($db) {
+    if (isset($_POST['login_btn'])) {
+        $username = mysqli_real_escape_string($db, $_POST['username']);
+        $password = mysqli_real_escape_string($db, $_POST['password']);
+        $password = md5($password);
+
+        $sql = "SELECT * FROM users WHERE  username='$username' AND password='$password'";
+        $result = mysqli_query($db, $sql);
+
+        if ($result) {
+            if (mysqli_num_rows($result) >= 1) {
+                $_SESSION['message'] = "You are now logged in";
+                $_SESSION['username'] = $username;
+
+                // Fetch the user role from the database
+                $row = mysqli_fetch_assoc($result);
+                $role = $row['role'];
+
+                if ($role == "admin") {
+                    header("location: ../admin/admin.php");
+                } else {
+                    header("location: ../index.php?role=" . $role);
+                }
+                exit();
+            } else {
+                $_SESSION['message'] = "Username and Password combination incorrect";
+            }
         }
-       else
-       {
-              $_SESSION['message']="Username and Password combiation incorrect";
-       }
-      }
-  }
+    }
 }
 ?>
 <!DOCTYPE html>
@@ -71,6 +76,7 @@ if($db)
           
           <div class="text-center">
             <button name="login_btn" type="submit" class="btn btn-primary">Login</button>
+            <a href="./register.php">Register New Account</a>
           </div>
         </form>
       </div>

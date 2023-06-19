@@ -42,31 +42,31 @@ include './inc/_header.php';
       <section class="tour-search">
         <div class="container">
 
-          <form action="" class="tour-search-form">
+          <form action="search.php" class="tour-search-form" method="POST">
 
             <div class="input-wrapper">
               <label for="destination" class="input-label">Search Destination*</label>
 
-              <input type="text" name="destination" id="destination" required placeholder="Enter Destination"
+              <input name="location" type="text" name="destination" id="destination" required placeholder="Enter Destination"
                 class="input-field">
             </div>
 
             <div class="input-wrapper">
               <label for="people" class="input-label">Pax Number*</label>
 
-              <input type="number" name="people" id="people" required placeholder="No.of People" class="input-field">
+              <input type="number" name="people" id="people"  placeholder="No.of People" class="input-field">
             </div>
 
             <div class="input-wrapper">
               <label for="checkin" class="input-label">Checkin Date**</label>
 
-              <input type="date" name="checkin" id="checkin" required class="input-field">
+              <input type="date" name="checkin" id="checkin"  class="input-field">
             </div>
 
             <div class="input-wrapper">
               <label for="checkout" class="input-label">Checkout Date*</label>
 
-              <input type="date" name="checkout" id="checkout" required class="input-field">
+              <input type="date" name="checkout" id="checkout"  class="input-field">
             </div>
 
             <button type="submit" class="btn btn-secondary">Inquire now</button>

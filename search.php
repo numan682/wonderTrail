@@ -1,14 +1,36 @@
+<?php 
+ini_set ('display_errors', 0);
+session_start();
+$username=$_SESSION['username'];
+$location=$_POST['location'];
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
     <title>Package Search</title>
+    <link rel="shortcut icon" href="assets/images/favicon.svg" type="image/svg+xml">
+
+<!-- 
+  - custom css link
+-->
+<link rel="stylesheet" href="./assets/css/style.css">
+
+<!-- 
+  - google font link
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link
+  href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Poppins:wght@400;500;600;700&display=swap"
+  rel="stylesheet">
     <!-- Include Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
     <div class="container mt-5">
         <h1>Package Search</h1>
-        <input type="text" id="searchInput" class="form-control" placeholder="Search">
+        <input type="text" id="searchInput" class="form-control" placeholder="Search" value="<?php echo $location ?>">
         <ul id="packageList" class="list-unstyled"></ul>
     </div>
 
@@ -31,7 +53,7 @@
                         // Generate the HTML for the search results
                         var html = '';
                         $.each(response, function(index, package) {
-                            html += '<li>';
+                            html += '<br><li>';
                             html += '  <div class="package-card">';
                             html += '    <figure class="card-banner">';
                             html += '      <img src="./assets/images/' + package.image + '" alt="' + package.title + '" loading="lazy">';
@@ -43,7 +65,7 @@
                             html += '        <li class="card-meta-item">';
                             html += '          <div class="meta-box">';
                             html += '            <ion-icon name="time" role="img" class="md hydrated" aria-label="time"></ion-icon>';
-                            html += '            <p class="text">' + package.days + '</p>';
+                            html += '            <p class="text">' + package.time + '</p>';
                             html += '          </div>';
                             html += '        </li>';
                             html += '        <li class="card-meta-item">';
@@ -72,11 +94,9 @@
                             html += '        </div>';
                             html += '      </div>';
                             html += '      <p class="price">$' + package.price + '<span>/ per person</span></p>';
-                            html += '      <form method="POST" action="book.php">';
-                            html += '        <input class="hide" name="package" value="' + package.title + '">';
-                            html += '        <input class="hide" name="price" value="' + package.price + '">';
+                            html += '      <form method="POST" action="package.php">';
                             html += '        <input class="hide" name="id" value="' + package.id + '">';
-                            html += '        <button type="submit" class="btn btn-secondary">Book Now</button>';
+                            html += '        <button type="submit" class="btn btn-secondary">More</button>';
                             html += '      </form>';
                             html += '    </div>';
                             html += '  </div>';
