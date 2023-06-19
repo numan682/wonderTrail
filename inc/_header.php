@@ -1,4 +1,5 @@
 <?php 
+ini_set ('display_errors', 0);
 session_start();
 if(  isset($_SESSION['username']) )
 {
@@ -42,7 +43,7 @@ if(  isset($_SESSION['username']) )
     <script>
 var currPageView =$(location).attr('pathname'); 
 console.log(currPageView);
-if(currPageView == '/tourly/index.php')
+if(currPageView != '/tourly/book.php')
 {
   $(document).ready(function() {
             $.ajax({
@@ -121,11 +122,10 @@ if(currPageView == '/tourly/index.php')
                     $${item.price}
                     <span>/ per person</span>
                   </p>
-<form method="POST" action="book.php">
-<input class="hide" name="package" value="${item.name}" >
-<input  class="hide" name="price" value="${item.price}" >
+<form method="POST" action="package.php">
+
 <input  class="hide" name="id" value="${item.id}" >
-  <button type="submit" class="btn btn-secondary">Book Now</button>
+  <button type="submit" class="btn btn-secondary">More</button>
 </form>
                 
 
@@ -176,7 +176,7 @@ if(currPageView == '/tourly/index.php')
         </a>
 
         <a href="#" class="logo">
-          <img src="./assets/images/logo.svg" alt="Tourly logo">
+         WonderTrail
         </a>
 
         <div class="header-btn-group">

@@ -1,4 +1,5 @@
 <?php
+// Replace with your actual database credentials
 include 'config.php';
 
 // Create a database connection
@@ -9,21 +10,17 @@ if (!$connection) {
     die('Database connection failed: ' . mysqli_connect_error());
 }
 
-// Edit Package
-$id = $_POST['id'];
-$name = $_POST['name'];
-$title = $_POST['title'];
-$description = $_POST['description'];
-$pax = $_POST['pax'];
-$price = $_POST['price'];
+// Get the user ID from the request
+$userId = $_POST['userId'];
 
-$sql = "UPDATE packages SET name = '$name', title = '$title', description = '$description', pax = '$pax', price = '$price' WHERE id = $id";
+// Delete the user from the database
+$sql = "DELETE FROM users WHERE id = $userId";
 $result = mysqli_query($connection, $sql);
 
 if ($result) {
-    echo 'Package edited successfully.';
+    echo 'User deleted successfully.';
 } else {
-    echo 'Failed to edit package.';
+    echo 'Failed to delete user.';
 }
 
 // Close the database connection

@@ -11,7 +11,7 @@
         <div class="footer-brand">
 
           <a href="#" class="logo">
-            <img src="./assets/images/logo.svg" alt="Tourly logo">
+           WonderTrail
           </a>
 
           <p class="footer-text">
@@ -75,7 +75,7 @@
       <div class="container">
 
         <p class="copyright">
-          &copy; 2022 <a href="">codewithsadee</a>. All rights reserved
+          &copy; 2023<a href=""></a>. All rights reserved
         </p>
 
         <ul class="footer-bottom-list">

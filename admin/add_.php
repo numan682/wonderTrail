@@ -65,8 +65,9 @@
                     contentType: false,
                     processData: false,
                     success: function(response) {
-                        alert(response); // Show success message or handle it as per your requirement
+                        alert(response); 
                         form[0].reset();
+                        
                     }
                 });
             });

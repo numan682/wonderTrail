@@ -259,7 +259,10 @@ body { background: var(--white); }
 
 .helpline-box .icon-box ion-icon { --ionicon-stroke-width: 40px; }
 
-.header-top .logo { margin-inline: auto; }
+.header-top .logo { margin-inline: auto; text-decoration: none;
+color: white;
+font-size: 2rem;
+}
 
 .header-top .logo img { max-width: 100px; }
 
@@ -706,7 +709,9 @@ body { background: var(--white); }
 
 .footer-brand img { width: 180px; }
 
-.footer-brand .logo { margin-bottom: 20px; }
+.footer-brand .logo { margin-bottom: 20px;
+color: white;
+font-size: 2rem; }
 
 .footer-text {
   font-size: var(--fs-5);

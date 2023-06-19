@@ -15,10 +15,7 @@ $targetFilePath = $targetDirectory . $fileName;
 move_uploaded_file($_FILES['image']['tmp_name'], $targetFilePath);
 
 // Database connection
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "mysite";
+include 'config.php';
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);

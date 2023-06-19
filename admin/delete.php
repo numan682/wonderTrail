@@ -1,11 +1,7 @@
 <?php
 
 // Replace with your actual database credentials
-$host = 'localhost';
-$username = 'root';
-$password = '';
-$database = 'mysite';
-
+include 'config.php';
 // Create a database connection
 $connection = mysqli_connect($host, $username, $password, $database);
 

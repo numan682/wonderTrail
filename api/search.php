@@ -1,9 +1,6 @@
 <?php
 // Establish database connection
-$host = 'localhost';
-$db = 'mysite';
-$user = 'root';
-$password = '';
+include 'config.php';
 
 $pdo = new PDO("mysql:host=$host;dbname=$db;charset=utf8mb4", $user, $password);
 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
